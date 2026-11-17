@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Documents publics - Zone Sanitaire PAS : plans stratégiques, guides médicaux, formulaires administratifs, bulletins épidémiologiques, textes réglementaires"/>
+  <title>Documents publics - Zone Sanitaire PAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="documents">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
+    <div class="max-w-7xl mx-auto px-gutter py-space-xl">
+      <!-- Page Header -->
+      <section class="mb-space-xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 text-secondary mb-4">
+          <span class="material-symbols-outlined text-base">description</span>
+          <span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Ressources & Réglementation</span>
+        </div>
+        <h1 class="display-hero text-primary tracking-tight mb-4">Documents publics</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+          Consultez et téléchargez gratuitement les textes cadres, guides usagers, formulaires sanitaires, bulletins épidémiologiques et rapports d'activité en vigueur dans la Zone Sanitaire PAS.
+        </p>
+      </section>
+
+      <!-- Category Tabs -->
+      <nav class="tabs mb-space-xl" role="tablist" aria-label="Catégories de documents">
+        <button class="tab active" role="tab" aria-selected="true" data-category="all">
+          <span class="material-symbols-outlined align-middle">folder</span> Tous
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="strategic">
+          <span class="material-symbols-outlined align-middle">picture_as_pdf</span> Plans Stratégiques
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="medical">
+          <span class="material-symbols-outlined align-middle">calendar_month</span> Guides Médicaux
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="administrative">
+          <span class="material-symbols-outlined align-middle">description</span> Formulaires
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="epidemiological">
+          <span class="material-symbols-outlined align-middle">analytics</span> Bulletins Épid.
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="regulatory">
+          <span class="material-symbols-outlined align-middle">gavel</span> Textes Réglementaires
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-category="reports">
+          <span class="material-symbols-outlined align-middle">assessment</span> Rapports d'Activité
+        </button>
+      </nav>
+
+      <!-- Search -->
+      <div class="relative max-w-md mb-space-xl">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+        <input class="w-full h-12 pl-12 pr-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-sm transition-all" id="document-search" placeholder="Rechercher un document..." type="text"/>
+      </div>
+
+      <!-- Documents Grid -->
+      <section id="documents-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+        <!-- Rendered by JS -->
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

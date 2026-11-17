@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Portail officiel de la Zone Sanitaire Porto-Novo–Aguégués–Sèmè-Podji - Annuaire des centres de santé, services, actualités et démarches administratives"/>
+  <title>Zone Sanitaire Porto-Novo – Aguégués – Sèmè-Podji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="accueil">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
+    <div class="flex flex-col w-full">
+      <!-- 1. Health Alert Banner -->
+      <aside aria-label="Alerte sanitaire officielle" class="w-full bg-secondary text-on-secondary px-gutter py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-sm text-center md:text-left">
+          <div class="flex items-center gap-space-sm">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container shrink-0">
+              <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+            </span>
+            <div class="flex flex-wrap items-center gap-x-2">
+              <span class="px-2 py-0.5 rounded-full bg-on-secondary/15 font-label-sm text-label-sm uppercase tracking-wider font-bold">Information de Garde</span>
+              <span class="font-body-sm text-body-sm font-medium">Campagne de vaccination et permanence des soins : retrouvez les centres de garde du week-end sur la zone.</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-space-sm shrink-0">
+            <a class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-secondary-fixed transition-colors shadow-sm" href="actualites.html?category=schedule">
+              <span>Consulter le tableau de garde</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 2. Hero Section -->
+      <section class="relative w-full bg-surface-container-low pt-space-xl pb-16 px-gutter overflow-hidden">
+        <div class="absolute -top-32 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-20 w-80 h-80 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl relative z-10">
+          <!-- Institutional Header & Titles -->
+          <div class="max-w-4xl space-y-space-md">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Direction Départementale de la Santé • Ouémé</span>
+              <span class="font-label-sm text-label-sm text-outline-variant">•</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Répertoire Public Certifié v3.0</span>
+            </div>
+            <h1 class="display-hero text-primary tracking-tight">
+              Portail Officiel de la Zone Sanitaire <br class="hidden sm:inline"/>
+              <span class="text-on-surface">Porto-Novo • Aguégués • Sèmè-Podji</span>
+            </h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+              Coordination des soins de santé primaires, annuaire certifié des centres de santé et démarches administratives pour les usagers et résidents des trois communes de l'Ouémé.
+            </p>
+          </div>
+
+          <!-- Quick Search Form -->
+          <div class="w-full bg-surface-container-lowest p-space-md lg:p-space-lg rounded-xl shadow-md">
+            <form id="hero-search-form" class="flex flex-col lg:flex-row items-stretch lg:items-end gap-space-md" onsubmit="event.preventDefault();">
+              <div class="flex-1 space-y-1.5">
+                <label class="block font-label-md text-label-md text-on-surface font-bold" for="commune-select">
+                  Commune de résidence
+                </label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant">location_city</span>
+                  <select class="w-full h-12 pl-11 pr-8 bg-surface-container-low text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#00288e] transition-all cursor-pointer" id="commune-select" name="commune">
+                    <option value="">Toutes les 3 communes</option>
+                    <option value="porto-novo">Porto-Novo (Capitale)</option>
+                    <option value="aguegues">Aguégués (Zone lacustre & berges)</option>
+                    <option value="seme-podji">Sèmè-Podji (Littoral & axes)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <label class="block font-label-md text-label-md text-on-surface font-bold" for="arrondissement-select">
+                  Arrondissement ou Quartier
+                </label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant">pin_drop</span>
+                  <select class="w-full h-12 pl-11 pr-8 bg-surface-container-low text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#00288e] transition-all cursor-pointer" id="arrondissement-select" name="arrondissement">
+                    <option value="">Tous les arrondissements</option>
+                    <option value="pn-1">1er Arrondissement (Porto-Novo)</option>
+                    <option value="pn-2">2ème Arrondissement (Porto-Novo)</option>
+                    <option value="pn-3">3ème Arrondissement (Porto-Novo)</option>
+                    <option value="pn-4">4ème Arrondissement (Porto-Novo)</option>
+                    <option value="pn-5">5ème Arrondissement (Porto-Novo)</option>
+                    <option value="ag-avagbodji">Avagbodji (Aguégués)</option>
+                    <option value="ag-houedome">Houédomè (Aguégués)</option>
+                    <option value="ag-zoungame">Zoungamè (Aguégués)</option>
+                    <option value="sp-ekpe">Ekpè (Sèmè-Podji)</option>
+                    <option value="sp-agblangandan">Agblangandan (Sèmè-Podji)</option>
+                    <option value="sp-djeregbé">Djèrègbé (Sèmè-Podji)</option>
+                    <option value="sp-tohoue">Tohouè (Sèmè-Podji)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <label class="block font-label-md text-label-md text-on-surface font-bold" for="type-select">
+                  Type de formation sanitaire
+                </label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant">local_hospital</span>
+                  <select class="w-full h-12 pl-11 pr-8 bg-surface-container-low text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#00288e] transition-all cursor-pointer" id="type-select" name="type">
+                    <option value="">Tous les établissements</option>
+                    <option value="csa">Centre de Santé d'Arrondissement (CSA)</option>
+                    <option value="csc">Centre de Santé Communal (CSC)</option>
+                    <option value="maternite">Maternité Publique Dédiée</option>
+                    <option value="confessionnel">Centre Confessionnel Agréé</option>
+                    <option value="hopital">Hôpital de Référence de Zone</option>
+                    <option value="lacustre">Dispensaire Lacustre</option>
+                  </select>
+                </div>
+              </div>
+              <button class="h-12 px-6 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-all shrink-0 shadow-md" type="submit">
+                <span class="material-symbols-outlined text-xl">search</span>
+                <span>Rechercher un centre</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- 3 Quick Access Cards -->
+          <div id="quick-access" class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Cards rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Key Statistics -->
+      <section class="w-full bg-primary text-on-primary py-space-xl px-gutter relative overflow-hidden" id="hero-stats">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-12">
+            <div class="space-y-2">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-primary-container font-bold">Cartographie & Métriques Sanitaires</span>
+              <h2 class="font-headline-lg text-headline-lg font-bold tracking-tight">La Zone Sanitaire PAS en chiffres</h2>
+            </div>
+            <p class="font-body-sm text-body-sm text-primary-fixed max-w-md">
+              Indicateurs consolidés par le Système National d'Information et de Gestion Sanitaires (SNIGS Bénin).
+            </p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Stats rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. MCZ Message -->
+      <section class="w-full bg-surface-container-lowest py-space-xl px-gutter">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+            <!-- MCZ Photo -->
+            <div class="lg:col-span-5 flex flex-col items-center">
+              <div class="relative w-full max-w-sm rounded-2xl overflow-hidden shadow-lg bg-surface-container-high">
+                <img alt="Portrait officiel du Docteur Alphonse KOSSI, Médecin Coordonnateur de la Zone Sanitaire PAS" class="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEI3bsA30rEn30FpyrHByfD8lvce6T7-sFUJ6_Z9veRF0Fh3Vi7rmf9AhIG3DlN8WTzW9Vg7ABBnXHVmtZ6VCzuAUlMtDoRhIXaVsFEq_cXFndXTSBjBRWpukDX0aQ6boeMxBnMgja8eWdrELVnyzuo7iKiDWL4DTzaSVPpT1s22njLr0E0iV-iZ098ZYa9c8ZqVE0lW02q7v2nUSHbZ6lGPXqrOua5cwzBw0E8ko"/>
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/95 via-primary/80 to-transparent p-6 text-on-primary">
+                  <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed font-bold block mb-1">Autorité Sanitaire de Zone</span>
+                  <p class="font-headline-sm text-headline-sm font-bold leading-tight">Dr Alphonse KOSSI</p>
+                  <p class="font-body-sm text-body-sm text-primary-fixed">Médecin Coordonnateur de Zone (MCZ)</p>
+                </div>
+              </div>
+              <div class="mt-4 flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-secondary text-base">verified</span>
+                <span>Nommé par Arrêté Ministériel • République du Bénin</span>
+              </div>
+            </div>
+
+            <!-- Editorial -->
+            <div class="lg:col-span-7 space-y-space-md">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold">
+                <span class="material-symbols-outlined text-base">format_quote</span>
+                <span>Éditorial Institutionnel du Coordonnateur</span>
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">
+                « Rapprocher le soin d'excellence de chaque foyer de Porto-Novo, Aguégués et Sèmè-Podji »
+              </h2>
+              <div class="space-y-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed text-justify">
+                <p>
+                  Chers concitoyens et usagers du service public de santé, l'engagement de notre équipe s'inscrit résolument dans les orientations stratégiques du Ministère de la Santé du Bénin. Notre mission première est de garantir une couverture sanitaire universelle, équitable et sans faille sur nos trois communes partenaires.
+                </p>
+                <p>
+                  Nous rappelons avec insistance à toutes les populations que plusieurs programmes nationaux vitaux demeurent entièrement <strong class="text-on-surface font-semibold">gratuits</strong> au sein de toutes nos formations sanitaires publiques accréditées :
+                </p>
+              </div>
+
+              <!-- Free Services Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-2">
+                <div class="flex items-start gap-3 p-4 rounded-xl bg-surface-container-low shadow-sm">
+                  <span class="material-symbols-outlined text-secondary text-2xl shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">pregnant_woman</span>
+                  <div>
+                    <h4 class="font-label-lg text-label-lg font-bold text-on-surface">Gratuité de la Césarienne</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Prise en charge intégrale de l'acte obstétrical et du kit chirurgical d'urgence.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 rounded-xl bg-surface-container-low shadow-sm">
+                  <span class="material-symbols-outlined text-secondary text-2xl shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">child_care</span>
+                  <div>
+                    <h4 class="font-label-lg text-label-lg font-bold text-on-surface">Paludisme chez les < 5 ans</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Dépistage TDR et traitement complet par CTA gratuits pour tous les enfants de moins de 5 ans.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-4 flex flex-wrap items-center gap-space-md">
+                <a class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all flex items-center gap-2 shadow-sm" href="contact.html">
+                  <span class="material-symbols-outlined text-base">mail</span>
+                  <span>Solliciter le cabinet du MCZ</span>
+                </a>
+                <div class="font-label-sm text-label-sm text-on-surface-variant">
+                  Permanence administrative : Lun - Ven (08h00 - 17h30)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Latest Announcements -->
+      <section class="w-full bg-surface-container-low py-space-xl px-gutter">
+        <div class="max-w-7xl mx-auto space-y-space-lg">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+            <div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold block mb-1">Publications & Alertes Officielles</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Dernières actualités sanitaires</h2>
+            </div>
+            <a id="view-all-announcements" class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-bold hover:underline" href="actualites.html">
+              <span>Consulter toutes les actualités</span>
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+            </a>
+          </div>
+          <div id="latest-announcements" class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Featured Documents -->
+      <section class="w-full bg-surface py-space-xl px-gutter">
+        <div class="max-w-7xl mx-auto space-y-space-lg">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+            <div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold block mb-1">Ressources & Réglementation</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Documents publics récents</h2>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+              Consultez et téléchargez gratuitement les textes cadres, guides usagers et formulaires sanitaires en vigueur.
+            </p>
+          </div>
+          <div id="featured-documents" class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Emergency Warning -->
+      <section class="w-full px-gutter py-space-lg">
+        <div class="max-w-7xl mx-auto rounded-2xl bg-error-container text-on-error-container p-6 lg:p-8 shadow-md">
+          <div class="flex flex-col lg:flex-row items-center justify-between gap-space-lg">
+            <div class="flex items-start gap-4 max-w-3xl">
+              <div class="w-12 h-12 rounded-xl bg-error text-on-error flex items-center justify-center shrink-0 shadow-sm">
+                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">cloud_download</span>
+              </div>
+              <div class="space-y-1">
+                <h3 class="font-headline-sm text-headline-sm font-bold text-on-error-container">
+                  Avertissement d'urgence médicale vitale
+                </h3>
+                <p class="font-body-md text-body-md text-on-error-container/90 leading-relaxed">
+                  Ce portail administratif ne traite en aucun cas les urgences médicales en temps réel. En cas de détresse respiratoire, traumatisme grave, convulsion ou malaise soudain, ne formulez aucune demande en ligne : contactez immédiatement les secours ou présentez-vous au centre de santé le plus proche.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm w-full lg:w-auto shrink-0">
+              <a class="h-14 px-6 rounded-xl bg-error text-on-error font-headline-sm text-headline-sm flex items-center justify-center gap-3 shadow-md hover:bg-error/90 transition-all" href="tel:112">
+                <span class="material-symbols-outlined text-2xl animate-pulse">call</span>
+                <span>SAMU : 112</span>
+              </a>
+              <a class="h-14 px-5 rounded-xl bg-surface-container-lowest text-secondary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-sm hover:bg-surface-container-high transition-all" href="tel:136">
+                <span class="material-symbols-outlined text-xl">support_agent</span>
+                <span>Ligne Verte : 136</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Annuaire officiel des structures sanitaires de la Zone Sanitaire PAS - Recherche, filtres, carte interactive et fiches détaillées"/>
+  <title>Nos centres de santé - Zone Sanitaire PAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="centres">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
+    <div class="flex flex-col w-full">
+      <!-- Page Header -->
+      <section class="relative bg-gradient-to-b from-surface-container-low to-surface px-gutter py-space-xl overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+          <div class="max-w-3xl space-y-space-xs">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary">
+              <span class="material-symbols-outlined text-sm">verified_user</span>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Direction Départementale de la Santé • Ouémé</span>
+            </div>
+            <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Annuaire Officiel des Structures Sanitaires ZS-PAS</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Données certifiées et révisées trimestriellement par le Bureau de Zone sanitaire (Porto-Novo • Aguégués • Sèmè-Podji).</p>
+          </div>
+          <div class="flex items-center gap-space-sm bg-surface-container-lowest p-2 rounded-xl shadow-sm">
+            <div class="px-4 py-2 rounded-lg bg-surface-container text-left">
+              <span class="block font-label-sm text-label-sm text-on-surface-variant uppercase">Structures Référencées</span>
+              <span class="font-headline-md text-headline-md text-primary font-bold" id="counter-total">0</span>
+            </div>
+            <div class="px-4 py-2 rounded-lg bg-secondary/10 text-left">
+              <span class="block font-label-sm text-label-sm text-secondary uppercase">Permanence 24h/24</span>
+              <span class="font-headline-md text-headline-md text-secondary font-bold" id="counter-24h">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters Section -->
+      <section class="max-w-7xl mx-auto mt-space-lg px-gutter">
+        <div class="bg-surface-container-lowest rounded-xl shadow-md p-space-md md:p-space-lg space-y-space-md">
+          <!-- Search & Quick Filters -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center">
+            <div class="lg:col-span-6 relative">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+              <input class="w-full h-12 pl-12 pr-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-sm transition-all" id="facility-search" placeholder="Rechercher par nom, quartier ou service (ex: Maternité, Djassin, CHD...)" type="text"/>
+            </div>
+            <div class="lg:col-span-3">
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">location_city</span>
+                <select class="w-full h-12 pl-10 pr-8 bg-surface-container-low rounded-lg font-label-md text-label-md text-on-surface focus:outline-none appearance-none cursor-pointer" id="filter-commune">
+                  <option value="all">Toutes les communes (PAS)</option>
+                  <option value="porto-novo">Porto-Novo</option>
+                  <option value="aguegues">Aguégués</option>
+                  <option value="seme-podji">Sèmè-Podji</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+              </div>
+            </div>
+            <div class="lg:col-span-3">
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">map</span>
+                <select class="w-full h-12 pl-10 pr-8 bg-surface-container-low rounded-lg font-label-md text-label-md text-on-surface focus:outline-none appearance-none cursor-pointer" id="filter-arrondissement">
+                  <option value="all">Tous les arrondissements</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Type & Service Filters -->
+          <div class="flex flex-wrap items-center justify-between gap-space-md pt-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-label-sm text-label-sm uppercase font-semibold text-on-surface-variant mr-1">Types :</span>
+              <button class="filter-type-btn active px-3 py-1.5 rounded-lg font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all" data-type-filter="all">Tous types</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="csa">CSA</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="csc">CSC</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="maternite">Maternités</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="hopital">Hôpital Zone</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="lacustre">Disp. Lacustres</button>
+              <button class="filter-type-btn px-3 py-1.5 rounded-lg font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all" data-type-filter="confessionnel">Confessionnels</button>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-label-sm text-label-sm uppercase font-semibold text-on-surface-variant mr-1">Services :</span>
+              <label class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+                <input class="accent-primary rounded" type="checkbox" value="Urgences 24/7"/>
+                <span>Urgences 24/7</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+                <input class="accent-primary rounded" type="checkbox" value="Maternité active"/>
+                <span>Maternité active</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+                <input class="accent-primary rounded" type="checkbox" value="PEV / Vaccination"/>
+                <span>PEV / Vaccination</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+                <input class="accent-primary rounded" type="checkbox" value="Pharmacie de garde"/>
+                <span>Pharmacie de garde</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+                <input class="accent-primary rounded" type="checkbox" value="Accouchement 24/7"/>
+                <span>Accouchement 24/7</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Main Content: List + Map -->
+    <section class="max-w-7xl mx-auto w-full px-gutter py-space-lg">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+        <!-- Left Column: Facility List -->
+        <div class="lg:col-span-7 flex flex-col gap-space-md">
+          <div class="flex items-center justify-between px-1">
+            <p class="font-label-md text-label-md text-on-surface-variant">
+              Affichage de <span class="font-bold text-on-surface" id="facility-count">0 centres certifiés</span> sur cette sélection
+            </p>
+            <div class="flex items-center gap-1 font-label-sm text-label-sm text-primary font-semibold cursor-pointer hover:underline">
+              <span class="material-symbols-outlined text-sm">tune</span>
+              <span>Trier par distance</span>
+            </div>
+          </div>
+
+          <div id="facility-list" class="space-y-space-md">
+            <!-- Facility cards rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Right Column: Map -->
+        <div class="lg:col-span-5 sticky top-24 space-y-space-md" id="map-view">
+          <div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden">
+            <!-- Map Toolbar -->
+            <div class="bg-surface-container p-space-sm flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base">location_on</span>
+                <span class="font-label-md text-label-md font-bold text-on-surface">Cartographie Territoriale ZS-PAS</span>
+              </div>
+              <div class="flex items-center gap-1 bg-surface-container-lowest rounded-lg p-0.5">
+                <button class="px-2 py-1 rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold" id="map-view-plan">Plan</button>
+                <button class="px-2 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface font-semibold" id="map-view-satellite">Satellite</button>
+                <button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Recentrer sur la zone PAS" id="map-recenter">
+                  <span class="material-symbols-outlined text-sm block">my_location</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="relative w-full h-[540px] bg-surface-container-low overflow-hidden select-none" id="map">
+              <!-- Leaflet map will be mounted here -->
+            </div>
+
+            <!-- Map Legend -->
+            <div class="p-space-md bg-surface-container-lowest space-y-space-xs">
+              <span class="font-label-sm text-label-sm uppercase font-bold text-on-surface-variant block">Légende Cartographique</span>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                  <span class="text-on-surface">Hôpital de Zone / Référence</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-secondary flex-shrink-0"></span>
+                  <span class="text-on-surface">Centre de Santé d'Arrondissement</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-tertiary-container flex-shrink-0"></span>
+                  <span class="text-on-surface">Dispensaire Lacustre / Pirogue</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-surface-container-highest flex-shrink-0"></span>
+                  <span class="text-on-surface">Maternité & Dispensaire isolé</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Offline Guide Download -->
+            <div class="p-space-sm bg-surface-container-low flex items-center justify-between">
+              <span class="text-xs text-on-surface-variant font-medium">Format imprimable / Consultable hors-ligne</span>
+              <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-lowest text-primary text-xs font-semibold hover:bg-surface-container transition-colors shadow-sm" onclick="downloadPDFGuide()">
+                <span class="material-symbols-outlined text-sm">download</span>
+                Guide PDF ZS-PAS
+              </button>
+            </div>
+          </div>
+
+          <!-- Emergency Quick Access -->
+          <div class="bg-error-container text-on-error-container p-space-md rounded-xl shadow-sm space-y-space-xs">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-error font-bold">medical_services</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-error-container font-bold">Transfert & Évacuation d'Urgence</h3>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-error-container">Pour tout besoin d'ambulance terrestre (Porto-Novo, Sèmè-Podji) ou d'embarcation motorisée d'urgence (Aguégués), contactez le Centre Régional de Coordination.</p>
+            <div class="pt-1">
+              <a class="w-full py-2.5 px-4 bg-error text-on-error rounded-lg font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-opacity" href="tel:112">
+                <span class="material-symbols-outlined">call</span>
+                Composer le 112 (Gratuit 24/7)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Governance Note -->
+    <section class="max-w-7xl mx-auto w-full px-gutter py-space-xl">
+      <div class="bg-surface-container-low rounded-2xl p-space-md md:p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+        <div class="flex items-start gap-space-md">
+          <div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-2xl">policy</span>
+          </div>
+          <div class="space-y-1">
+            <h4 class="font-headline-sm text-headline-sm text-on-surface">Gouvernance des données et intégrité publique</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+              Date de dernière vérification officielle : <strong class="text-on-surface" id="last-verification-date">15 Octobre 2026</strong>. Les informations relatives aux permanences médicales, numéros d'urgence et disponibilités des maternités sont contrôlées in situ par les équipes d'inspection sanitaire de l'Ouémé.
+            </p>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <a class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-bold shadow-sm hover:bg-surface-container transition-all" href="contact.html">
+            <span class="material-symbols-outlined text-base">report_problem</span>
+            Signaler une anomalie / MAJ
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

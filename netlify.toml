@@ -1,0 +1,165 @@
+# Netlify Configuration - Portail ZS-PAS
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Pas de build step pour site statique pur
+  # Si ajout build step (ex: Vite, Tailwind CLI), décommenter:
+  # command = "npm run build"
+  # publish = "dist"
+  publish = "."
+  command = "echo 'Static site - no build step required'"
+
+[build.environment]
+  NODE_VERSION = "18"
+  # Variables d'environnement build-time (pas secrets!)
+  # VITE_SUPABASE_URL = "https://xxx.supabase.co"
+  # VITE_SUPABASE_ANON_KEY = "xxx"
+
+[[headers]]
+  # Headers de sécurité globaux
+  for = "/*"
+  [headers.values]
+    # Protection contre clickjacking
+    X-Frame-Options = "DENY"
+    # Protection MIME sniffing
+    X-Content-Type-Options = "nosniff"
+    # Politique référent
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Permissions API
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self), payment=()"
+    # Content Security Policy - AJUSTER selon domaines réels
+    Content-Security-Policy = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+    # HSTS (1 an, includeSubDomains, preload)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Cache pour assets statiques (1 an)
+    # Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Cache long pour assets (CSS, JS, images, fonts)
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/sql/*"
+  [headers.values]
+    # Empêcher accès direct aux fichiers SQL
+    X-Content-Type-Options = "nosniff"
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/docs/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[redirects]]
+  # SPA fallback pour admin (si routing côté client ajouté)
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+[[redirects]]
+  # Redirection www → non-www (ou inversement selon config DNS)
+  # from = "https://www.zs-pas.sante.gouv.bj/*"
+  # to = "https://zs-pas.sante.gouv.bj/:splat"
+  # status = 301
+  # force = true
+
+[[redirects]]
+  # Raccourcis utiles
+  from = "/rdv"
+  to = "/rendez-vous.html"
+  status = 301
+
+[[redirects]]
+  from = "/centres"
+  to = "/centres.html"
+  status = 301
+
+[[redirects]]
+  from = "/actualites"
+  to = "/actualites.html"
+  status = 301
+
+[[redirects]]
+  from = "/documents"
+  to = "/documents.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 301
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/connexion.html"
+  status = 301
+
+[[redirects]]
+  # Favicon
+  from = "/favicon.ico"
+  to = "/assets/favicon.svg"
+  status = 302
+
+[[redirects]]
+  # Robots.txt (généré dynamiquement ou statique)
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  # Sitemap.xml (généré dynamiquement ou statique)
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+# Configuration Edge Functions (si utilisées)
+[functions]
+  # Directory pour Edge Functions Netlify (optionnel)
+  # directory = "netlify/functions"
+  # node_bundler = "esbuild"
+  # included_files = ["**/*"]
+  # excluded_files = ["**/*.test.ts", "**/*.spec.ts"]
+
+# Configuration DNS (pour domaine personnalisé)
+# [domain]
+#   name = "zs-pas.sante.gouv.bj"
+#   auto_ssl = true
+
+# Configuration Build Plugins (optionnel)
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+#   [plugins.inputs]
+#     thresholds = {performance = 90, accessibility = 100, best-practices = 90, seo = 90}
+
+# Variables d'environnement (définies dans Netlify Dashboard, pas ici!)
+# [build.environment]
+#   VITE_SUPABASE_URL = "https://xxx.supabase.co"
+#   VITE_SUPABASE_ANON_KEY = "xxx"
+#   # SECRETS (uniquement pour Edge Functions):
+#   # SUPABASE_SERVICE_ROLE_KEY = "xxx"
+#   # SENDGRID_API_KEY = "xxx"
+#   # TWILIO_ACCOUNT_SID = "xxx"
+#   # TWILIO_AUTH_TOKEN = "xxx"
+
+# Configuration Preview Deployments
+[context.deploy-preview]
+  command = "echo 'Preview deploy - no build step'"
+
+[context.branch-deploy]
+  command = "echo 'Branch deploy - no build step'"
+
+# Configuration pour split testing (optionnel)
+# [split_testing]
+#   enabled = false

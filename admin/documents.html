@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestion documents - Administration ZS-PAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="admin-documents">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+  <aside class="admin-sidebar"><div class="admin-sidebar-header"><a href="../index.html" class="admin-sidebar-logo"><img alt="Logo ZS-PAS" src="../assets/logo-zs-pas.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary font-bold">ZS-PAS Admin</span><span class="font-label-sm text-label-sm text-on-surface-variant">Direction Sanitaire</span></div></a></div><div class="admin-sidebar-session"><span class="material-symbols-outlined text-xs">verified_user</span><span class="font-label-sm text-label-sm">Session authentifiée</span></div><nav class="admin-nav"><a href="tableau-de-bord.html" class="admin-nav-item" data-path="portail-agent-admin"><span class="material-symbols-outlined text-lg">dashboard</span>Tableau de bord</a><a href="rendez-vous.html" class="admin-nav-item" data-path="gestion-rendez-vous"><span class="material-symbols-outlined text-lg">calendar_month</span>Rendez-vous administrés</a><a href="contacts.html" class="admin-nav-item" data-path="registre-reclamations"><span class="material-symbols-outlined text-lg">report_problem</span>Réclamations usagers</a><a href="centres.html" class="admin-nav-item" data-path="gestion-centres"><span class="material-symbols-outlined text-lg">local_hospital</span>Gestion des centres</a><a href="services.html" class="admin-nav-item" data-path="gestion-services"><span class="material-symbols-outlined text-lg">medical_services</span>Gestion des services</a><a href="actualites.html" class="admin-nav-item" data-path="transmission-epidemiologique"><span class="material-symbols-outlined text-lg">health_and_safety</span>Workflow publications</a><a href="documents.html" class="admin-nav-item active" data-path="gestion-documents"><span class="material-symbols-outlined text-lg">description</span>Gestion documents</a></nav><div class="admin-sidebar-footer"><span class="font-label-sm text-label-sm text-on-surface-variant">Urgences Déclarées</span><span class="font-label-md text-label-md font-bold text-error">SAMU 112 • Vert 136</span><a href="../index.html" class="block font-label-sm text-label-sm text-primary hover:underline pt-1">← Retour au portail public</a></div></aside>
+  <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle" aria-label="Ouvrir le menu"><span class="material-symbols-outlined">menu</span></button>
+  <div class="sidebar-overlay"></div>
+  <div class="admin-main"><header class="admin-header"><div class="flex items-center gap-space-md"><span class="font-label-sm text-label-sm bg-secondary/10 text-secondary px-2.5 py-1 rounded font-semibold">Porto-Novo • Aguégués • Sèmè-Podji</span></div><div class="flex items-center gap-space-md"><button class="notification-btn" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span></button><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEI3bsA30rEn30FpyrHByfD8lvce6T7-sFUJ6_Z9veRF0Fh3Vi7rmf9AhIG3DlN8WTzW9Vg7ABBnXHVmtZ6VCzuAUlMtDoRhIXaVsFEq_cXFndXTSBjBRWpukDX0aQ6boeMxBnMgja8eWdrELVnyzuo7iKiDWL4DTzaSVPpT1s22njLr0E0iV-iZ098ZYa9c8ZqVE0lW02q7v2nUSHbZ6lGPXqrOua5cwzBw0E8ko"/><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md font-bold text-on-surface leading-tight">Dr Alphonse KOSSI</span><span class="font-label-sm text-label-sm text-on-surface-variant">Super Admin</span></div><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div></header>
+  <main class="admin-content" id="main-content">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg"><div><h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Gestion des Documents Publics</h1><p class="font-body-sm text-body-sm text-on-surface-variant">Publier, organiser et suivre les téléchargements des documents.</p></div><button class="btn btn-primary" onclick="openDocumentModal()"><span class="material-symbols-outlined">add</span> Nouveau document</button></div>
+    <div class="table-container"><table class="w-full text-left border-collapse" id="documents-table"><thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><tr><th class="py-3 px-space-md font-bold">Titre</th><th class="py-3 px-space-md font-bold">Catégorie</th><th class="py-3 px-space-md font-bold">Taille</th><th class="py-3 px-space-md font-bold">Téléchargements</th><th class="py-3 px-space-md font-bold">Date</th><th class="py-3 px-space-md font-bold">Statut</th><th class="py-3 px-space-md font-bold text-right">Actions</th></tr></thead><tbody class="divide-y divide-surface-container font-body-sm text-body-sm" id="documents-tbody"></tbody></table></div>
+  </main>
+  </div>
+  <footer class="w-full bg-surface-container-lowest mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-gutter py-space-md text-center"><p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Zone Sanitaire PAS - République du Bénin</p></div></footer>
+
+  <!-- Document Modal -->
+  <div class="modal-overlay" id="document-modal" role="dialog" aria-modal="true" aria-labelledby="document-modal-title">
+    <div class="modal"><header class="modal-header"><h2 class="modal-title" id="document-modal-title">Nouveau document</h2><button class="modal-close" onclick="closeDocumentModal()" aria-label="Fermer"><span class="material-symbols-outlined">close</span></button></header>
+    <form class="modal-body" id="document-form" novalidate>
+      <input type="hidden" id="document-id"/>
+      <div class="form-group"><label class="form-label" for="document-title">Titre *</label><input class="form-input" id="document-title" required placeholder="Ex: Plan de Développement Sanitaire 2026-2030"/></div>
+      <div class="form-group"><label class="form-label" for="document-category">Catégorie *</label><select class="form-select" id="document-category" required><option value="">Sélectionner</option><option value="strategic">Plans Stratégiques</option><option value="medical">Guides Médicaux & Protocoles</option><option value="administrative">Formulaires & Démarches</option><option value="epidemiological">Bulletins Épidémiologiques</option><option value="regulatory">Textes Réglementaires</option><option value="reports">Rapports d'Activité</option></select></div>
+      <div class="form-group"><label class="form-label" for="document-description">Description</label><textarea class="form-textarea" id="document-description" rows="3" placeholder="Description pour l'annuaire public..."></textarea></div>
+      <div class="form-row"><div class="form-group"><label class="form-label" for="document-file">Fichier PDF *</label><input class="form-input" id="document-file" type="file" accept=".pdf" required/></div><div class="form-group"><label class="form-label" for="document-pages">Nombre de pages</label><input class="form-input" id="document-pages" type="number" min="1"/></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label" for="document-featured">À la une</label><div class="form-check"><input class="form-check-input" type="checkbox" id="document-featured"/><div class="form-check-content"><span class="form-check-title">Afficher en page d'accueil</span></div></div></div><div class="form-group"><label class="form-label" for="document-public">Public</label><div class="form-check"><input class="form-check-input" type="checkbox" id="document-public" checked/><div class="form-check-content"><span class="form-check-title">Visible publiquement</span></div></div></div></div>
+    </form>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeDocumentModal()">Annuler</button><button class="btn btn-primary" type="submit" form="document-form"><span class="material-symbols-outlined">save</span> Enregistrer</button></div>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+  <script type="module">
+    import { ADMIN } from '../js/admin.js';
+    import { initAuth } from '../js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initAuth();
+      ADMIN.initPage('documents');
+    });
+
+    function logout() { import('../js/auth.js').then(auth => auth.signOut()); window.location.href = 'connexion.html'; }
+    function openDocumentModal() { document.getElementById('document-modal').classList.add('open'); document.body.style.overflow = 'hidden'; document.getElementById('document-form').reset(); document.getElementById('document-id').value = ''; document.getElementById('document-modal-title').textContent = 'Nouveau document'; }
+    function closeDocumentModal() { document.getElementById('document-modal').classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('document-modal')?.addEventListener('click', (e) => { if (e.target.id === 'document-modal') closeDocumentModal(); });
+  </script>
+</body>
+</html>

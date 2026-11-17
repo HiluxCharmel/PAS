@@ -1,0 +1,355 @@
+/*
+ * Responsive Utilities - Mobile-First Approach
+ * Based on Stitch Design System
+ */
+
+/* Mobile First - Default styles apply to mobile (< 640px) */
+
+/* Tablet: 640px - 1023px */
+@media (min-width: 640px) {
+  .tablet\:flex { display: flex; }
+  .tablet\:flex-row { flex-direction: row; }
+  .tablet\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tablet\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tablet\:hidden { display: none; }
+  .tablet\:block { display: block; }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .desktop\:flex { display: flex; }
+  .desktop\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .desktop\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .desktop\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .desktop\:hidden { display: none; }
+  .desktop\:block { display: block; }
+}
+
+/* Large Desktop: 1280px+ */
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Responsive text sizing */
+@media (max-width: 639px) {
+  .display-hero {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .headline-lg {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .headline-md {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+/* Touch target minimums (48x48px) */
+@media (pointer: coarse) {
+  button, a, input[type="checkbox"], input[type="radio"], select {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .btn {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --outline: #000;
+    --outline-variant: #333;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  header, footer, nav, .no-print {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* Utility for sticky footer */
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Mobile navigation toggle */
+@media (max-width: 1023px) {
+  .mobile-nav-toggle {
+    display: flex !important;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--surface-container-lowest);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .nav-menu.open {
+    right: 0;
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Card grid responsive */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Two column layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Three column layout */
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .three-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Form grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+  min-width: 600px;
+}
+
+/* Image responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Video responsive */
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Map container responsive */
+#map {
+  width: 100%;
+  height: 500px;
+}
+
+@media (max-width: 639px) {
+  #map {
+    height: 400px;
+  }
+}
+
+/* Admin sidebar responsive */
+@media (max-width: 1023px) {
+  .admin-sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--surface-container-low);
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .admin-sidebar.open {
+    left: 0;
+  }
+
+  .admin-content {
+    margin-left: 0;
+  }
+
+  .admin-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .admin-sidebar-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+  }
+
+  .admin-content {
+    margin-left: 280px;
+  }
+}
+
+/* Header height compensation */
+header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+main {
+  padding-top: 80px; /* Adjust based on header height */
+}
+
+/* RTL support for future */
+[dir="rtl"] {
+  .flex-row { flex-direction: row-reverse; }
+  .gap-sm { gap: var(--space-sm); }
+}

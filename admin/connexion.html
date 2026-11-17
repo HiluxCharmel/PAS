@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Connexion administration - Zone Sanitaire PAS"/>
+  <title>Connexion - Espace Administration ZS-PAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/admin.css"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased" data-page="connexion">
+  <main class="login-page" role="main">
+    <div class="login-card">
+      <header class="login-header">
+        <img alt="Logo Officiel ZS-PAS Bénin" class="login-logo" src="../assets/logo-zs-pas.svg"/>
+        <h1 class="login-title">Espace Administration</h1>
+        <p class="login-subtitle">Zone Sanitaire Porto-Novo–Aguégués–Sèmè-Podji</p>
+      </header>
+
+      <form class="login-form" id="login-form" novalidate>
+        <div class="space-y-1.5">
+          <label class="block font-label-md text-label-md text-on-surface font-semibold" for="email">
+            Adresse e-mail professionnelle
+          </label>
+          <input class="w-full h-12 px-4 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-all placeholder:text-outline" id="email" type="email" placeholder="agent@zs-pas.sante.gouv.bj" required autocomplete="email" aria-required="true"/>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block font-label-md text-label-md text-on-surface font-semibold" for="password">
+            Mot de passe
+          </label>
+          <div class="relative">
+            <input class="w-full h-12 px-4 pr-12 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-all placeholder:text-outline" id="password" type="password" placeholder="••••••••" required autocomplete="current-password" aria-required="true"/>
+            <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" id="toggle-password" aria-label="Afficher/masquer le mot de passe">
+              <span class="material-symbols-outlined" id="password-eye">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input class="w-4 h-4 text-primary focus:ring-0 rounded" id="remember" type="checkbox"/>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">Se souvenir de moi</span>
+          </label>
+          <a href="#" class="font-label-sm text-label-sm text-primary hover:underline">Mot de passe oublié ?</a>
+        </div>
+
+        <button class="btn btn-primary btn-full btn-lg" type="submit">
+          <span class="material-symbols-outlined">login</span>
+          Se connecter
+        </button>
+      </form>
+
+      <footer class="login-footer">
+        <p>Connexion sécurisée • Authentification à deux facteurs requise • <a href="../index.html">← Retour au portail public</a></p>
+        <p class="mt-2">© 2024 République du Bénin - Zone Sanitaire PAS</p>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initAuth, signInWithEmail } from '../js/auth.js';
+    import { showToast } from '../js/components.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initAuth();
+
+      // Toggle password visibility
+      const toggleBtn = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.getElementById('password-eye');
+
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.type === 'password';
+          passwordInput.type = isPassword ? 'text' : 'password';
+          eyeIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+        });
+      }
+
+      // Form submission
+      const form = document.getElementById('login-form');
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const remember = document.getElementById('remember').checked;
+
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Connexion...';
+          submitBtn.disabled = true;
+
+          try {
+            const result = await signInWithEmail(email, password);
+
+            if (result.success) {
+              showToast('Connexion réussie', 'success');
+              // Redirect to dashboard
+              setTimeout(() => {
+                window.location.href = 'tableau-de-bord.html';
+              }, 500);
+            } else {
+              showToast(result.error || 'Identifiants invalides', 'error');
+            }
+          } catch (err) {
+            console.error('Login error:', err);
+            showToast('Erreur de connexion', 'error');
+          } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+# Robots.txt - Portail ZS-PAS
+# Generated automatically - do not edit manually
+
+User-agent: *
+Allow: /
+
+# Pages publiques
+Allow: /index.html
+Allow: /centres.html
+Allow: /services.html
+Allow: /rendez-vous.html
+Allow: /actualites.html
+Allow: /documents.html
+Allow: /contact.html
+Allow: /mentions-legales.html
+Allow: /politique-confidentialite.html
+Allow: /plan-du-site.html
+
+# Administration (disallow crawling)
+Disallow: /admin/
+Disallow: /admin/*
+
+# Fichiers techniques
+Disallow: /sql/
+Disallow: /docs/
+Disallow: /*.sql
+Disallow: /*.md
+Disallow: /netlify.toml
+Disallow: /.gitignore
+Disallow: /README.md
+
+# Assets (allow crawling for images)
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# Sitemap
+Sitemap: https://zs-pas.sante.gouv.bj/sitemap.xml
+
+# Host
+Host: https://zs-pas.sante.gouv.bj

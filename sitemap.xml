@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Page d'accueil -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/" />
+  </url>
+
+  <!-- Annuaire centres de santé -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/centres.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/centres.html" />
+  </url>
+
+  <!-- Services de santé -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/services.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/services.html" />
+  </url>
+
+  <!-- Rendez-vous administratif -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/rendez-vous.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/rendez-vous.html" />
+  </url>
+
+  <!-- Actualités & Annonces -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/actualites.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/actualites.html" />
+  </url>
+
+  <!-- Documents publics -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/documents.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/documents.html" />
+  </url>
+
+  <!-- Contact & Réclamations -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/contact.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/contact.html" />
+  </url>
+
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/mentions-legales.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/mentions-legales.html" />
+  </url>
+
+  <!-- Politique de confidentialité -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/politique-confidentialite.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/politique-confidentialite.html" />
+  </url>
+
+  <!-- Plan du site -->
+  <url>
+    <loc>https://zs-pas.sante.gouv.bj/plan-du-site.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zs-pas.sante.gouv.bj/plan-du-site.html" />
+  </url>
+
+  <!-- Administration (non indexé, mais listé pour structure) -->
+  <!-- <url>
+    <loc>https://zs-pas.sante.gouv.bj/admin/connexion.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url> -->
+
+</urlset>
